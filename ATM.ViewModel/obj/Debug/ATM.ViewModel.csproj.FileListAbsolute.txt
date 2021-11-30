@@ -1,0 +1,12 @@
+D:\projects\c#\windosform\ATM.App\ATM.ViewModel\bin\Debug\ATM.ViewModel.dll
+D:\projects\c#\windosform\ATM.App\ATM.ViewModel\bin\Debug\ATM.ViewModel.pdb
+D:\projects\c#\windosform\ATM.App\ATM.ViewModel\obj\Debug\ATM.ViewModel.csproj.AssemblyReference.cache
+D:\projects\c#\windosform\ATM.App\ATM.ViewModel\obj\Debug\ATM.ViewModel.csproj.CoreCompileInputs.cache
+D:\projects\c#\windosform\ATM.App\ATM.ViewModel\obj\Debug\ATM.ViewModel.dll
+D:\projects\c#\windosform\ATM.App\ATM.ViewModel\obj\Debug\ATM.ViewModel.pdb
+D:\projects\c#\windosform\ATM\ATM.ViewModel\bin\Debug\ATM.ViewModel.dll
+D:\projects\c#\windosform\ATM\ATM.ViewModel\bin\Debug\ATM.ViewModel.pdb
+D:\projects\c#\windosform\ATM\ATM.ViewModel\obj\Debug\ATM.ViewModel.csproj.AssemblyReference.cache
+D:\projects\c#\windosform\ATM\ATM.ViewModel\obj\Debug\ATM.ViewModel.csproj.CoreCompileInputs.cache
+D:\projects\c#\windosform\ATM\ATM.ViewModel\obj\Debug\ATM.ViewModel.dll
+D:\projects\c#\windosform\ATM\ATM.ViewModel\obj\Debug\ATM.ViewModel.pdb

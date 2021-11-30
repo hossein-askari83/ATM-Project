@@ -1,0 +1,15 @@
+D:\projects\c#\windosform\ATM.App\ConsoleApp1\bin\Debug\ConsoleApp1.exe.config
+D:\projects\c#\windosform\ATM.App\ConsoleApp1\bin\Debug\ConsoleApp1.exe
+D:\projects\c#\windosform\ATM.App\ConsoleApp1\bin\Debug\ConsoleApp1.pdb
+D:\projects\c#\windosform\ATM.App\ConsoleApp1\bin\Debug\ATM.DataLayer.dll
+D:\projects\c#\windosform\ATM.App\ConsoleApp1\bin\Debug\EntityFramework.dll
+D:\projects\c#\windosform\ATM.App\ConsoleApp1\bin\Debug\ATM.DataLayer.pdb
+D:\projects\c#\windosform\ATM.App\ConsoleApp1\bin\Debug\ATM.DataLayer.dll.config
+D:\projects\c#\windosform\ATM.App\ConsoleApp1\bin\Debug\EntityFramework.xml
+D:\projects\c#\windosform\ATM.App\ConsoleApp1\obj\Debug\ConsoleApp1.csproj.AssemblyReference.cache
+D:\projects\c#\windosform\ATM.App\ConsoleApp1\obj\Debug\ConsoleApp1.csproj.CoreCompileInputs.cache
+D:\projects\c#\windosform\ATM.App\ConsoleApp1\obj\Debug\ConsoleApp1.csproj.CopyComplete
+D:\projects\c#\windosform\ATM.App\ConsoleApp1\obj\Debug\ConsoleApp1.exe
+D:\projects\c#\windosform\ATM.App\ConsoleApp1\obj\Debug\ConsoleApp1.pdb
+D:\projects\c#\windosform\ATM.App\ConsoleApp1\bin\Debug\EntityFramework.SqlServer.dll
+D:\projects\c#\windosform\ATM.App\ConsoleApp1\bin\Debug\EntityFramework.SqlServer.xml

@@ -1,0 +1,322 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="ATM.DBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="CreditCards">
+          <Key>
+            <PropertyRef Name="CardID" />
+          </Key>
+          <Property Name="CardID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CardNumber" Type="bigint" Nullable="false" />
+          <Property Name="Password" Type="int" Nullable="false" />
+          <Property Name="IssueDate" Type="date" Nullable="false" />
+          <Property Name="ExpirationDate" Type="date" Nullable="false" />
+          <Property Name="Cvv2" Type="int" Nullable="false" />
+          <Property Name="Amount" Type="int" Nullable="false" />
+          <Property Name="RegisteredPhone" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="InTheNameOf" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Receipts">
+          <Key>
+            <PropertyRef Name="TransactionID" />
+          </Key>
+          <Property Name="TransactionID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TransactionAmount" Type="int" Nullable="false" />
+          <Property Name="OriginCardID" Type="int" Nullable="false" />
+          <Property Name="DestinationCardID" Type="int" Nullable="false" />
+          <Property Name="TransactionDate" Type="datetime" Nullable="false" />
+          <Property Name="Description" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Users">
+          <Key>
+            <PropertyRef Name="UserID" />
+          </Key>
+          <Property Name="UserID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="UserPassword" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="UserPhone" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="UserEmail" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="UsersCards">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserID" Type="int" Nullable="false" />
+          <Property Name="CardID" Type="int" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_Receipts_CreditCards">
+          <End Role="CreditCards" Type="Self.CreditCards" Multiplicity="1" />
+          <End Role="Receipts" Type="Self.Receipts" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CreditCards">
+              <PropertyRef Name="CardID" />
+            </Principal>
+            <Dependent Role="Receipts">
+              <PropertyRef Name="DestinationCardID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Receipts_CreditCards1">
+          <End Role="CreditCards" Type="Self.CreditCards" Multiplicity="1" />
+          <End Role="Receipts" Type="Self.Receipts" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CreditCards">
+              <PropertyRef Name="CardID" />
+            </Principal>
+            <Dependent Role="Receipts">
+              <PropertyRef Name="OriginCardID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UsersCards_CreditCards">
+          <End Role="CreditCards" Type="Self.CreditCards" Multiplicity="1" />
+          <End Role="UsersCards" Type="Self.UsersCards" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CreditCards">
+              <PropertyRef Name="CardID" />
+            </Principal>
+            <Dependent Role="UsersCards">
+              <PropertyRef Name="CardID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UsersCards_Users">
+          <End Role="Users" Type="Self.Users" Multiplicity="1" />
+          <End Role="UsersCards" Type="Self.UsersCards" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="UsersCards">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="ATMDBModelStoreContainer">
+          <EntitySet Name="CreditCards" EntityType="Self.CreditCards" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Receipts" EntityType="Self.Receipts" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UsersCards" EntityType="Self.UsersCards" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Receipts_CreditCards" Association="Self.FK_Receipts_CreditCards">
+            <End Role="CreditCards" EntitySet="CreditCards" />
+            <End Role="Receipts" EntitySet="Receipts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Receipts_CreditCards1" Association="Self.FK_Receipts_CreditCards1">
+            <End Role="CreditCards" EntitySet="CreditCards" />
+            <End Role="Receipts" EntitySet="Receipts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UsersCards_CreditCards" Association="Self.FK_UsersCards_CreditCards">
+            <End Role="CreditCards" EntitySet="CreditCards" />
+            <End Role="UsersCards" EntitySet="UsersCards" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UsersCards_Users" Association="Self.FK_UsersCards_Users">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="UsersCards" EntitySet="UsersCards" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="ATM.DBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="CreditCards">
+          <Key>
+            <PropertyRef Name="CardID" />
+          </Key>
+          <Property Name="CardID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CardNumber" Type="Int64" Nullable="false" />
+          <Property Name="IssueDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="ExpirationDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Cvv2" Type="Int32" Nullable="false" />
+          <Property Name="Amount" Type="Int32" Nullable="false" />
+          <Property Name="RegisteredPhone" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="UsersCards" Relationship="Self.FK_UsersCards_CreditCards" FromRole="CreditCards" ToRole="UsersCards" />
+          <Property Name="Password" Type="Int32" Nullable="false" />
+          <Property Name="InTheNameOf" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Receipts" Relationship="ATM.DBModel.FK_Receipts_CreditCards" FromRole="CreditCards" ToRole="Receipts" />
+          <NavigationProperty Name="Receipts1" Relationship="ATM.DBModel.FK_Receipts_CreditCards1" FromRole="CreditCards" ToRole="Receipts" />
+          </EntityType>
+        <EntityType Name="Users">
+          <Key>
+            <PropertyRef Name="UserID" />
+          </Key>
+          <Property Name="UserID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="UserPassword" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="UserPhone" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="UserEmail" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="UsersCards" Relationship="Self.FK_UsersCards_Users" FromRole="Users" ToRole="UsersCards" />
+        </EntityType>
+        <EntityType Name="UsersCards">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserID" Type="Int32" Nullable="false" />
+          <Property Name="CardID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="CreditCards" Relationship="Self.FK_UsersCards_CreditCards" FromRole="UsersCards" ToRole="CreditCards" />
+          <NavigationProperty Name="Users" Relationship="Self.FK_UsersCards_Users" FromRole="UsersCards" ToRole="Users" />
+        </EntityType>
+        <Association Name="FK_UsersCards_CreditCards">
+          <End Role="CreditCards" Type="Self.CreditCards" Multiplicity="1" />
+          <End Role="UsersCards" Type="Self.UsersCards" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CreditCards">
+              <PropertyRef Name="CardID" />
+            </Principal>
+            <Dependent Role="UsersCards">
+              <PropertyRef Name="CardID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UsersCards_Users">
+          <End Role="Users" Type="Self.Users" Multiplicity="1" />
+          <End Role="UsersCards" Type="Self.UsersCards" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="UsersCards">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="ATM_DBEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="CreditCards" EntityType="Self.CreditCards" />
+          <EntitySet Name="Users" EntityType="Self.Users" />
+          <EntitySet Name="UsersCards" EntityType="Self.UsersCards" />
+          <AssociationSet Name="FK_UsersCards_CreditCards" Association="Self.FK_UsersCards_CreditCards">
+            <End Role="CreditCards" EntitySet="CreditCards" />
+            <End Role="UsersCards" EntitySet="UsersCards" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UsersCards_Users" Association="Self.FK_UsersCards_Users">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="UsersCards" EntitySet="UsersCards" />
+          </AssociationSet>
+          <EntitySet Name="Receipts" EntityType="ATM.DBModel.Receipts" />
+          <AssociationSet Name="FK_Receipts_CreditCards" Association="ATM.DBModel.FK_Receipts_CreditCards">
+            <End Role="CreditCards" EntitySet="CreditCards" />
+            <End Role="Receipts" EntitySet="Receipts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Receipts_CreditCards1" Association="ATM.DBModel.FK_Receipts_CreditCards1">
+            <End Role="CreditCards" EntitySet="CreditCards" />
+            <End Role="Receipts" EntitySet="Receipts" />
+          </AssociationSet>
+          </EntityContainer>
+        <EntityType Name="Receipts">
+          <Key>
+            <PropertyRef Name="TransactionID" />
+          </Key>
+          <Property Name="TransactionID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TransactionAmount" Type="Int32" Nullable="false" />
+          <Property Name="OriginCardID" Type="Int32" Nullable="false" />
+          <Property Name="DestinationCardID" Type="Int32" Nullable="false" />
+          <Property Name="TransactionDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Description" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="CreditCards" Relationship="ATM.DBModel.FK_Receipts_CreditCards" FromRole="Receipts" ToRole="CreditCards" />
+          <NavigationProperty Name="CreditCards1" Relationship="ATM.DBModel.FK_Receipts_CreditCards1" FromRole="Receipts" ToRole="CreditCards" />
+        </EntityType>
+        <Association Name="FK_Receipts_CreditCards">
+          <End Type="ATM.DBModel.CreditCards" Role="CreditCards" Multiplicity="1" />
+          <End Type="ATM.DBModel.Receipts" Role="Receipts" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CreditCards">
+              <PropertyRef Name="CardID" />
+            </Principal>
+            <Dependent Role="Receipts">
+              <PropertyRef Name="DestinationCardID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Receipts_CreditCards1">
+          <End Type="ATM.DBModel.CreditCards" Role="CreditCards" Multiplicity="1" />
+          <End Type="ATM.DBModel.Receipts" Role="Receipts" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CreditCards">
+              <PropertyRef Name="CardID" />
+            </Principal>
+            <Dependent Role="Receipts">
+              <PropertyRef Name="OriginCardID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="ATMDBModelStoreContainer" CdmEntityContainer="ATM_DBEntities">
+          <EntitySetMapping Name="CreditCards">
+            <EntityTypeMapping TypeName="ATM.DBModel.CreditCards">
+              <MappingFragment StoreEntitySet="CreditCards">
+                <ScalarProperty Name="InTheNameOf" ColumnName="InTheNameOf" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="CardID" ColumnName="CardID" />
+                <ScalarProperty Name="CardNumber" ColumnName="CardNumber" />
+                <ScalarProperty Name="IssueDate" ColumnName="IssueDate" />
+                <ScalarProperty Name="ExpirationDate" ColumnName="ExpirationDate" />
+                <ScalarProperty Name="Cvv2" ColumnName="Cvv2" />
+                <ScalarProperty Name="Amount" ColumnName="Amount" />
+                <ScalarProperty Name="RegisteredPhone" ColumnName="RegisteredPhone" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Users">
+            <EntityTypeMapping TypeName="ATM.DBModel.Users">
+              <MappingFragment StoreEntitySet="Users">
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="UserPassword" ColumnName="UserPassword" />
+                <ScalarProperty Name="UserPhone" ColumnName="UserPhone" />
+                <ScalarProperty Name="UserEmail" ColumnName="UserEmail" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UsersCards">
+            <EntityTypeMapping TypeName="ATM.DBModel.UsersCards">
+              <MappingFragment StoreEntitySet="UsersCards">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="CardID" ColumnName="CardID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Receipts">
+            <EntityTypeMapping TypeName="ATM.DBModel.Receipts">
+              <MappingFragment StoreEntitySet="Receipts">
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="TransactionDate" ColumnName="TransactionDate" />
+                <ScalarProperty Name="DestinationCardID" ColumnName="DestinationCardID" />
+                <ScalarProperty Name="OriginCardID" ColumnName="OriginCardID" />
+                <ScalarProperty Name="TransactionAmount" ColumnName="TransactionAmount" />
+                <ScalarProperty Name="TransactionID" ColumnName="TransactionID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

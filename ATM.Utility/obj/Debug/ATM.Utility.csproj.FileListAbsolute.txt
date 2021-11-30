@@ -1,0 +1,11 @@
+D:\projects\c#\windosform\ATM.App\ATM.Utility\bin\Debug\ATM.Utility.dll
+D:\projects\c#\windosform\ATM.App\ATM.Utility\bin\Debug\ATM.Utility.pdb
+D:\projects\c#\windosform\ATM.App\ATM.Utility\obj\Debug\ATM.Utility.csproj.CoreCompileInputs.cache
+D:\projects\c#\windosform\ATM.App\ATM.Utility\obj\Debug\ATM.Utility.dll
+D:\projects\c#\windosform\ATM.App\ATM.Utility\obj\Debug\ATM.Utility.pdb
+D:\projects\c#\windosform\ATM\ATM.Utility\bin\Debug\ATM.Utility.dll
+D:\projects\c#\windosform\ATM\ATM.Utility\bin\Debug\ATM.Utility.pdb
+D:\projects\c#\windosform\ATM\ATM.Utility\obj\Debug\ATM.Utility.csproj.AssemblyReference.cache
+D:\projects\c#\windosform\ATM\ATM.Utility\obj\Debug\ATM.Utility.csproj.CoreCompileInputs.cache
+D:\projects\c#\windosform\ATM\ATM.Utility\obj\Debug\ATM.Utility.dll
+D:\projects\c#\windosform\ATM\ATM.Utility\obj\Debug\ATM.Utility.pdb

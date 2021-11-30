@@ -1,0 +1,124 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="ATM.DBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="CreditCards">
+    <Key>
+      <PropertyRef Name="CardID" />
+    </Key>
+    <Property Name="CardID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="CardNumber" Type="Int64" Nullable="false" />
+    <Property Name="IssueDate" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="ExpirationDate" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="Cvv2" Type="Int32" Nullable="false" />
+    <Property Name="Amount" Type="Int32" Nullable="false" />
+    <Property Name="RegisteredPhone" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="UsersCards" Relationship="Self.FK_UsersCards_CreditCards" FromRole="CreditCards" ToRole="UsersCards" />
+    <Property Name="Password" Type="Int32" Nullable="false" />
+    <Property Name="InTheNameOf" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Receipts" Relationship="ATM.DBModel.FK_Receipts_CreditCards" FromRole="CreditCards" ToRole="Receipts" />
+    <NavigationProperty Name="Receipts1" Relationship="ATM.DBModel.FK_Receipts_CreditCards1" FromRole="CreditCards" ToRole="Receipts" />
+  </EntityType>
+  <EntityType Name="Users">
+    <Key>
+      <PropertyRef Name="UserID" />
+    </Key>
+    <Property Name="UserID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="UserName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="UserPassword" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="UserPhone" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="UserEmail" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="UsersCards" Relationship="Self.FK_UsersCards_Users" FromRole="Users" ToRole="UsersCards" />
+  </EntityType>
+  <EntityType Name="UsersCards">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="UserID" Type="Int32" Nullable="false" />
+    <Property Name="CardID" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="CreditCards" Relationship="Self.FK_UsersCards_CreditCards" FromRole="UsersCards" ToRole="CreditCards" />
+    <NavigationProperty Name="Users" Relationship="Self.FK_UsersCards_Users" FromRole="UsersCards" ToRole="Users" />
+  </EntityType>
+  <Association Name="FK_UsersCards_CreditCards">
+    <End Role="CreditCards" Type="Self.CreditCards" Multiplicity="1" />
+    <End Role="UsersCards" Type="Self.UsersCards" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CreditCards">
+        <PropertyRef Name="CardID" />
+      </Principal>
+      <Dependent Role="UsersCards">
+        <PropertyRef Name="CardID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_UsersCards_Users">
+    <End Role="Users" Type="Self.Users" Multiplicity="1" />
+    <End Role="UsersCards" Type="Self.UsersCards" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="UserID" />
+      </Principal>
+      <Dependent Role="UsersCards">
+        <PropertyRef Name="UserID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="ATM_DBEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="CreditCards" EntityType="Self.CreditCards" />
+    <EntitySet Name="Users" EntityType="Self.Users" />
+    <EntitySet Name="UsersCards" EntityType="Self.UsersCards" />
+    <AssociationSet Name="FK_UsersCards_CreditCards" Association="Self.FK_UsersCards_CreditCards">
+      <End Role="CreditCards" EntitySet="CreditCards" />
+      <End Role="UsersCards" EntitySet="UsersCards" />
+    </AssociationSet>
+    <AssociationSet Name="FK_UsersCards_Users" Association="Self.FK_UsersCards_Users">
+      <End Role="Users" EntitySet="Users" />
+      <End Role="UsersCards" EntitySet="UsersCards" />
+    </AssociationSet>
+    <EntitySet Name="Receipts" EntityType="ATM.DBModel.Receipts" />
+    <AssociationSet Name="FK_Receipts_CreditCards" Association="ATM.DBModel.FK_Receipts_CreditCards">
+      <End Role="CreditCards" EntitySet="CreditCards" />
+      <End Role="Receipts" EntitySet="Receipts" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Receipts_CreditCards1" Association="ATM.DBModel.FK_Receipts_CreditCards1">
+      <End Role="CreditCards" EntitySet="CreditCards" />
+      <End Role="Receipts" EntitySet="Receipts" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="Receipts">
+    <Key>
+      <PropertyRef Name="TransactionID" />
+    </Key>
+    <Property Name="TransactionID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="TransactionAmount" Type="Int32" Nullable="false" />
+    <Property Name="OriginCardID" Type="Int32" Nullable="false" />
+    <Property Name="DestinationCardID" Type="Int32" Nullable="false" />
+    <Property Name="TransactionDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="Description" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="CreditCards" Relationship="ATM.DBModel.FK_Receipts_CreditCards" FromRole="Receipts" ToRole="CreditCards" />
+    <NavigationProperty Name="CreditCards1" Relationship="ATM.DBModel.FK_Receipts_CreditCards1" FromRole="Receipts" ToRole="CreditCards" />
+  </EntityType>
+  <Association Name="FK_Receipts_CreditCards">
+    <End Type="ATM.DBModel.CreditCards" Role="CreditCards" Multiplicity="1" />
+    <End Type="ATM.DBModel.Receipts" Role="Receipts" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CreditCards">
+        <PropertyRef Name="CardID" />
+      </Principal>
+      <Dependent Role="Receipts">
+        <PropertyRef Name="DestinationCardID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Receipts_CreditCards1">
+    <End Type="ATM.DBModel.CreditCards" Role="CreditCards" Multiplicity="1" />
+    <End Type="ATM.DBModel.Receipts" Role="Receipts" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CreditCards">
+        <PropertyRef Name="CardID" />
+      </Principal>
+      <Dependent Role="Receipts">
+        <PropertyRef Name="OriginCardID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>
